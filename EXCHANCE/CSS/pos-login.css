@@ -20,14 +20,20 @@ input{
 }
 
 select{
-    height: 60px;
+    height: 50px;
     width: 400px;
     border: 1px solid black;
     border-radius: 5px; 
  }
 
+ #informacoes-localizacao{
+   width: 1000px;
+   height: 1000px;
+ }
+
 #informacoes-localizacao input{
-    width: 992px;
+    width: 835px;
+    height: 50px;
  }
 
  #informacoes-b input{
@@ -88,17 +94,59 @@ select{
 }
 
 
-#header-vertical{
-    background-color: #faf1ec;
-    height: 860px;
-    width: 240px;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+#header-vertical {
+   background-color: #bfac8b;
+   height: 681px;
+   width: 280px;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   transition: transform 0.3s ease;
+}
+
+#header-vertical-localizacao {
+   background-color: #bfac8b;
+   height: 861px;
+   width: 280px;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   transition: transform 0.3s ease;
+}
+
+#toggle-button {
+   cursor: pointer;
+   padding: 10px;
+}
+
+#toggle-button span {
+   display: block;
+   width: 20px;
+   height: 2px;
+   background-color: #000;
+   margin-bottom: 4px;
+}
+
+#header-vertical.collapsed {
+   transform: translateX(-240px);
+}
+
+
+#header-vertical-reserva{
+   background-color: #faf1ec;
+   height: 830px;
+   width: 240px;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+}
+
+#header-vertical-localizacao.collapsed {
+   transform: translateX(-240px);
 }
 
 #menu{
-    color: #808080;
+    color: #4d4a4a;
     height: 25px;   
     left: 30px;
     display: flex;
@@ -113,7 +161,7 @@ select{
 
 #menu h2{
     margin-top: 5px;
-    margin-left: 4px;
+    margin-left: 12px;
 }
 
 #corpo{
@@ -139,13 +187,14 @@ select{
 }
 
 #imagem{
-    height: 340px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     position: relative;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 20px;
 }
 
 #endereco{
@@ -176,8 +225,9 @@ select{
 #imagem-alinhada{
     background-image: url(../image/Family.png);
     background-size: cover;
-    width: 290px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
+    margin-top: 35px;
     
 }
 
@@ -225,7 +275,7 @@ select{
     width: 470px;
     position: absolute;
     height: 350px;
-    left: 480px;
+    left: 380px;
     top: 570px; 
     flex-direction: column;
     align-items: start;
@@ -263,7 +313,7 @@ select{
     height: 60px;
     position: absolute;
     margin-top: 740px;
-    margin-left: 1370px;
+    margin-left: 950px;
     border-radius: 5px;
     background-color: #e3b59c;
     border: none;
@@ -284,16 +334,16 @@ select{
  #informacoes-conta{
     width: 100%;
     height: 600px;
-    margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     color: #808080;
+    margin-top: 100px;
  }
 
  #card-conta{
-    height: 500px;
-    width: 300px;
+    height: 400px;
+    width: 240px;
     border: 1px dashed #808080;
     border-width: thin;
     border-radius: 10px;
@@ -306,8 +356,8 @@ select{
     width: 300px;
     height: 60px;
     position: absolute;
-    margin-top: 740px;
-    margin-left: 1520px;
+    margin-top: 760px;
+    margin-left: 1470px;
     border-radius: 5px;
     background-color: #e3b59c;
     border: none;
@@ -329,12 +379,12 @@ select{
  }
 
  #progresso #divisoria{
-    width: 1250px;
+    width: 1050px;
     height: 1px;
  }
 
  #fase{
-    width: 1250px;
+    width: 1000px;
     height: 90px;
     display: flex;
     align-items: center;
@@ -343,15 +393,27 @@ select{
  }
 
  #card-requisitos{
-    width: 1250px;
-    height: 610px;
+    width: 1050px;
+    height: 510px;
     position: absolute; 
-    margin-top: 770px;
+    margin-top: 640px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
  }
+
+ #card-localizacao{
+   width: 1050px;
+   height: 510px;
+   position: absolute; 
+   margin-top: 510px;
+   border-radius: 10px;
+   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.4);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
 
  #titulo{
     width: 80%;
@@ -415,7 +477,7 @@ select{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 20px;
  }
 
 
@@ -423,31 +485,37 @@ select{
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-top: 30px;
  }
 
  #informacoes-b{
     display: flex;
     align-items: start;
     flex-direction: column;
-    margin-top: 30px;
  }
 
  #disponibilidade button{
     position: absolute;
-    margin-left: 330px;
-    margin-top: 345px;
+    margin-left: 310px;
+    margin-top: 320px;
  }
 
  #data-disp{
-    height: 150px;
-    width: 80%;
+    height: 100px;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: center;
-
  }
+
+ #data-disp-fim{
+   height: 100px;
+   width: 50%;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   justify-content: center;
+}
 
  #dias{
     height: 300px;
@@ -480,11 +548,18 @@ select{
  }
 
  #data-disp input{
-    height: 70px;
-    width: 420px;
+    height: 50px;
+    width: 220px;
     margin-top: 20px;
     border: 1px solid #808080;
  }
+
+ #data-disp-fim input{
+   height: 50px;
+   width: 220px;
+   margin-top: 20px;
+   border: 1px solid #808080;
+}
 
  #adicionar{
     display: flex;
@@ -508,12 +583,13 @@ select{
  }
 
  #tipo{
-    height: 150px;
+    height: 100px;
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    margin-bottom: 46px;
  }
  
  #tipo a{
@@ -523,7 +599,7 @@ select{
  #acomodacao button{
     position: absolute;
     margin-left: 330px;
-    margin-top: 365px;
+    margin-top: 337px;
  }
 
  #titulo-acomodacao{
@@ -556,8 +632,20 @@ select{
 
  #informacoes-integrantes{
    width: 45%;
-   height: 610px;
+   height: 510px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   margin-right: 30px;
  }
+
+ #area-integrante{
+   height: 241px;
+   width: 493px;
+   border: #000 1px solid;
+ }
+
+ 
 
  #informacoes-integrantes input{
    width: 450px;
@@ -566,13 +654,25 @@ select{
  #adicionar-integrante{
    width: 45%;
    height: 610px;
+   min-height: 1px;
  }
 
  #card-integrantes{
-   width: 1250px;
-   height: 610px;
+   width: 1050px;
+   height: 510px;
    position: absolute; 
-   margin-top: 770px;
+   margin-top: 640px;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#card-fotos{
+   width: 1050px;
+   height: 510px;
+   position: absolute; 
+   margin-top: 690px;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
    display: flex;
    align-items: center;
@@ -585,35 +685,52 @@ select{
 
 #adicionar-integrante input{
    margin-bottom: 10px;
-   width: 500px;
+   width: 470px;
    height: 230px;
 }
 
 #confirmar-integrante{
-   width: 560px;
+   width: 500px;
    height: 100px;
-   margin-top: 37px;
+   margin-top: 11px;
    display: flex;
    align-items: center;
-   justify-content: space-around;
-   
+   justify-content: space-between;
+}
+
+#confirmar-integrante button{
+   height: 55px;
+   width: 140px;
+}
+
+#remover{
+   background-color: red;
 }
 
 #add{
    background-color: #0861A6;
-   margin-right: 180px;
-}
-
-#next{
-   margin-right: 50px;
 }
 
 #fotos{
-   width: 1100px;
-   height: 400px;
+   width: 990px;
+   height: 370px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+}
+
+#carregar-fotos{
+   width: 990px;
+   height: 350px;
    display: flex;
    align-items: center;
-   justify-content: space-around;
+}
+
+#imagens-adicionadas{
+   height: 300px;
+   width: 420px;
+   margin-left: 50px;
+   border: 1px solid black;
 }
 
 #fotos-host{
@@ -621,6 +738,8 @@ select{
    align-items: center;
    justify-content: space-around;
    flex-direction: column;
+   width: 800px;
+   height: 400px;
 }
 
 #fotos-host #titulo{
@@ -646,7 +765,7 @@ select{
 #cadastrar{
    width: 400px;
    margin-top: 70px;
-   margin-left: 1200px;
+   margin-left: 730px;
    background-color: #0861A6;
 
 }
@@ -654,12 +773,13 @@ select{
 #termos{
    width: 800px;
    height: 600px;
-   margin-left: 350px;
-   margin-top: 140px;
+   margin-left: 450px;
+   margin-top: 50px;
    display: flex;
    align-items: center;
    justify-content: space-around;
    flex-direction: column;
+   position: absolute;
 }
 
 #card-termo{
@@ -686,3 +806,140 @@ select{
    margin-bottom: 100px;
 }
 
+.sidebar {
+   position: fixed;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 200px;
+   background-color: #333;
+   color: #fff;
+   padding: 20px;
+   transition: all 0.3s ease;
+ }
+ 
+ .sidebar ul {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+ }
+ 
+ .sidebar ul li {
+   margin-bottom: 10px;
+ }
+ 
+ .sidebar ul li a {
+   color: #fff;
+   text-decoration: none;
+ }
+ 
+ .content {
+   margin-left: 200px;
+   padding: 20px;
+   transition: all 0.3s ease;
+ }
+ 
+ .menu-toggle {
+   position: absolute;
+   left: 200px;
+   top: 20px;
+   font-size: 20px;
+   color: #fff;
+   cursor: pointer;
+ }
+ 
+ .menu-toggle:hover {
+   color: #ccc;
+ }
+
+
+ /*
+  novo código
+ */
+
+
+ #cardd{
+   height: 1100px;
+   width: 65%;
+   margin-left: 100px;
+   margin-top: 50px;
+   background-color: #ffffff;
+   border-radius: 10px;
+   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.4);
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center; 
+   flex-direction: column;
+ }
+
+ 
+/*
+  descricao
+ */
+
+ #card-content {
+   width: 80%;
+   height: 150px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+#card-content input{
+   height: 100px;
+   width: 100%;
+}
+
+.description-container {
+   position: relative;
+ }
+ 
+ .description {
+   height: 100px;
+   width: 100%;
+   padding: 10px;
+   resize: vertical;
+   box-sizing: border-box;
+   border: 1px solid #ccc;
+   font-family: Arial, sans-serif;
+   font-size: 14px;
+   line-height: 1.0;
+   overflow-y: auto;
+   text-align: left;
+ }
+ 
+ .character-count {
+   position: absolute;
+   bottom: 5px;
+   right: 5px;
+   font-size: 12px;
+   color: #999;
+ }
+
+ #card-disponibilidade {
+   width: 80%;
+   height: 150px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   
+}
+
+#ajustee{
+   display: flex;
+}
+
+#diaria{
+   width: 80%;
+   height: 100px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+#diaria input{
+   height: 50px;
+   width: 220px;
+   border: 1px solid #808080;
+}
+ 

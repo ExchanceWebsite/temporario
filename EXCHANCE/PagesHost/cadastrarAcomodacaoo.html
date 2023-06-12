@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/pos-login.css">
+</head>
+
+<body>
+    <div id="header">
+        <h2 id="frase">Olá, Família Schwartz!</h2>
+        <div id="toggle-button" onclick="toggleHeader()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="teste"><img src="../image/LogoExchance.png"></div>
+    </div>
+    <div id="corpo">
+        <div id="header-vertical-localizacao">
+            <div id="menu">
+                <img src="../image/icons8-aeroporto-32 (1).png" alt="">
+                <h2>Reservas</h2>
+            </div>
+            <div id="menu">
+                <img src="../image/icons8-mensagem-de-bate-papo-32.png" alt="">
+                <h2>Chat</h2>
+            </div>
+            <div id="menu">
+                <img src="../image/icons8-alarme-32.png" alt="">
+                <h2>Notificações</h2>
+            </div>
+            <div id="menu">
+                <img src="../image/icons8-usuário-50.png" alt="">
+                <h2 id="ajuste">Conta</h2>
+            </div>
+        </div>
+
+        <div id="cardd">
+
+            <div id="card-content">
+                <h2>Descrição sobre sua família:</h2>
+                <div class="description-container">
+                    <textarea id="discricaoInput" class="description" placeholder="Digite sua descrição aqui"
+                        maxlength="300"></textarea>
+                    <div class="character-count"></div>
+                </div>
+            </div>
+
+            <div id="card-disponibilidade">
+
+                <div>
+                    <h2>Insira data de disponibilidade:</h2>
+                </div>
+
+                <div id="ajustee">
+                    <div id="data-disp">
+                        <h3>Início:</h3>
+                        <input id="inicio" type="date">
+                    </div>
+
+                    <div id="data-disp-fim">
+                        <h3>Fim:</h3>
+                        <input id="fim" type="date">
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="diaria">
+                <h2>Insira o valor da diária da sua acomodação:</h2>
+                <input type="text" id="valor" name="valor" placeholder="$ 0,00">
+            </div>
+
+            <div id="card-content">
+                <h2>Regras e limitações:</h2>
+                <div class="description-container">
+                    <textarea id="regrasInput" class="description" placeholder="Digite sua descrição aqui"
+                        maxlength="300"></textarea>
+                    <div class="character-count"></div>
+                </div>
+            </div>
+
+            <div id="fotos">
+                <div>
+                    <h2>Fotos</h2>
+                </div>
+                <div id="carregar-fotos">
+                    <div id="load-fotos">
+                        <label for="upload-input">
+                            <img id="upload-image" src="../image/icons8-adicionar-50.png" alt="">
+                        </label>
+                        <input id="upload-input" type="file" accept="image/*" style="display: none;">
+                    </div>
+
+                    <div id="imagens-adicionadas">
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <button onclick="cadastrar()">Próximo</button>
+            </div>
+
+            <div>
+
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    function cadastrar() {
+        var descricao = document.getElementById('discricaoInput').value;
+        var dataEntrada = document.getElementById('inicio').value;
+        var dataSaida = document.getElementById('fim').value;
+        var valorDiaria = document.getElementById('valor').value;
+        var regras = document.getElementById('regrasInput').value;
+        var url = 'http://localhost:8080/acomodacoes/add-acomodacao'; // Substitua pela URL correta do seu backend Java
+
+        var acomodacaoDTO = {
+
+            host: {
+                idHostFamily: 1,
+            },
+            descricao: descricao,
+            inicioDisponibilidade: dataEntrada,
+            fimDisponibilidade: dataSaida,
+            valorDiaria: valorDiaria,
+            regras: regras
+        }
+
+        var acomodacaoDTOString = JSON.stringify(acomodacaoDTO);
+        console.log(acomodacaoDTOString);
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1lZGUxMjNAZ21haWwuY29tIiwiaWF0IjoxNjg1OTY5OTg0LCJleHAiOjE2ODk1Njk5ODR9.i9owWA3yIPpkVVbfpfuoMs9_LdF8ELgALUeCrmBdGi5dR6fO346u2m3PMMr9_B6LUpj-Z5kiXN4FtqLAYNR1qA' //
+            },
+            body: acomodacaoDTOString
+        })
+            .then(function (response) {
+                // Verifica se a resposta da requisição foi bem-sucedida (código de status 2xx)
+                if (response.ok) {
+                    return response.json(); // Retorna a resposta como JSON
+                } else {
+                    throw new Error('Erro na requisição.'); // Lança um erro caso a resposta não seja bem-sucedida
+                }
+            })
+            .then(function (data) {
+                console.log(data); // Manipula os dados da resposta aqui
+            })
+            .catch(function (error) {
+                console.error(error); // Manipula erros ocorridos durante a requisição
+            });
+    }
+
+
+    function toggleHeader() {
+        var header = document.getElementById('header-vertical');
+        header.classList.toggle('collapsed');
+    }
+
+    const textarea = document.querySelector('.description');
+    const characterCount = document.querySelector('.character-count');
+
+    textarea.addEventListener('input', function () {
+        const remainingChars = 300 - this.value.length;
+        characterCount.textContent = remainingChars + ' caracteres restantes';
+
+        if (remainingChars <= 30) {
+            characterCount.style.color = 'red';
+        } else {
+            characterCount.style.color = 'black'; // Define a cor padrão quando não estiver faltando 30 caracteres
+        }
+    });
+
+    const inputValor = document.getElementById('valor');
+
+    inputValor.addEventListener('input', function () {
+        // Remove todos os caracteres não numéricos, exceto o separador decimal
+        let valor = this.value.replace(/[^0-9,.]/g, '');
+
+        // Substitui a vírgula por ponto (para formatação adequada do número)
+        valor = valor.replace(',', '.');
+
+        // Formata o valor para o formato de moeda ($0.00)
+        valor = formatarValorMoeda(valor);
+
+        // Atualiza o valor no campo de entrada
+        this.value = valor;
+    });
+
+    function formatarValorMoeda(valor) {
+        // Converte o valor para número
+        const numero = parseFloat(valor);
+
+        // Verifica se o valor é um número válido
+        if (isNaN(numero)) {
+            return '';
+        }
+
+        // Formata o número para o formato de moeda ($0.00)
+        return numero.toLocaleString('en-US', { currency: 'USD' });
+    }
+
+    /*
+
+    document.getElementById('upload-image').addEventListener('click', function () {
+        document.getElementById('upload-input').click();
+    });
+
+    document.getElementById('upload-input').addEventListener('change', function (event) {
+        var imagensAdicionadas = document.getElementById('imagens-adicionadas');
+
+        // Clear any previously added images
+        imagensAdicionadas.innerHTML = '';
+
+        var files = event.target.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var imageURL = URL.createObjectURL(file);
+
+            var imageContainer = document.createElement('div');
+            imageContainer.classList.add('image-container');
+
+            var imageElement = document.createElement('img');
+            imageElement.src = imageURL;
+
+            var removeButton = document.createElement('button');
+            removeButton.innerText = 'Remover';
+            removeButton.addEventListener('click', function () {
+                imageContainer.remove();
+            });
+
+            imageContainer.appendChild(imageElement);
+            imageContainer.appendChild(removeButton);
+            imagensAdicionadas.appendChild(imageContainer);
+        }
+    });
+
+    */
+
+    document.getElementById('upload-input').addEventListener('change', function (event) {
+    var imagensAdicionadas = document.getElementById('imagens-adicionadas');
+
+    // Clear any previously added images
+    imagensAdicionadas.innerHTML = '';
+
+    var files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var filePath = URL.createObjectURL(file);
+
+        var filePathElement = document.createElement('p');
+        filePathElement.innerText = filePath;
+
+        imagensAdicionadas.appendChild(filePathElement);
+        console.log(filePathElement);
+    }
+});
+
+
+
+
+
+
+</script>

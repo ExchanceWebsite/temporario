@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="C:\Users\kaike.mamede.viana\Desktop\EXCHANCE\CSS\pos-login.css">
+    <link rel="stylesheet" href="../CSS/pos-login.css">
     <style>
         body {
             font-family: 'Poppins';
@@ -17,12 +17,17 @@
 
 <body>
     <div id="header">
-        <div id="teste"><img src="../image/LogoExchance.png"></div>
         <h2 id="frase">Olá, Família Schwartz!</h2>
+        <div id="toggle-button" onclick="toggleHeader()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div id="teste"><img src="../image/LogoExchance.png"></div>
     </div>
 
     <div id="corpo">
-        <div id="header-vertical">
+        <div id="header-vertical-localizacao">
 
             <div id="menu">
                 <img src="../image/icons8-aeroporto-32 (1).png" alt="">
@@ -43,39 +48,28 @@
         </div>
 
         <div id="progresso">
-            <div id="fase">
-                <img src="../image/cadastro-hosttt/8.png" alt="">
-                <img src="../image/cadastro-hosttt/8.png" alt="">
-                <img src="../image/cadastro-hosttt/8.png" alt="">
-                <img src="../image/cadastro-hosttt/8.png" alt="">
-                <img src="../image/cadastro-hosttt/8.png" alt="">
-                <img src="../image/cadastro-hosttt/6.png" alt="">
-                <img src="../image/cadastro-hosttt/8.png" alt="">
-            </div>
-            <div id="divisoria"></div>
 
             <div id="card-integrantes">
 
                 <div id="informacoes-integrantes">
                     <div id="titulo">
-                        <a>Host Family</a>
+                        <h2>Cadastrar Integrantes</h2>
                     </div>
-    
+
                     <div id="tipo">
-                        <a>Nome</a>
-                        <input type="text">
+                        <h3>Nome</h3>
+                        <input id="nomeInput" type="text">
                     </div>
-    
+
                     <div id="tipo">
-                        <a>Parentesco</a>
-                        <input type="text">
+                        <h3>Parentesco</h3>
+                        <input id="parentescoInput" type="text">
                     </div>
-    
+
                     <div id="tipo">
-                        <a>Idade</a>
-                        <input type="text">
+                        <h3>Idade</h3>
+                        <input id="idadeInput" type="number">
                     </div>
-    
                 </div>
 
                 <div id="adicionar-integrante">
@@ -83,31 +77,73 @@
                         <a>Integrantes</a>
                     </div>
                     <div>
-                        <input type="text">
+                        <div id="area-integrante"></div>
                     </div>
                     <div id="confirmar-integrante">
-                        <button id="add">Adicionar</button>
-                        <button id="next">Próximo</button>
+                        <button id="add" onclick="cadastrarIntegrante()">Adicionar</button>
+                        <button id="remover">Remover</button>
+                        <button id="next" onclick="teste()">Próximo</button>
                     </div>
                 </div>
-
-              
-                
-
             </div>
-
         </div>
     </div>
-
-
-
     </div>
-
-
-
-
-
     </div>
 </body>
+
+<script>
+    function toggleHeader() {
+        var header = document.getElementById('header-vertical');
+        header.classList.toggle('collapsed');
+    }
+
+    function cadastrarIntegrante() {
+        var nome = document.getElementById('nomeInput').value;
+        var parentesco = document.getElementById('parentescoInput').value;
+        var idade = document.getElementById('idadeInput').value;
+        var url = 'http://localhost:8080/integrantes/add-integrante'; // Substitua pela URL correta do seu backend Java
+
+        var integranteDTO = {
+            nome: nome,
+            parentesco: parentesco,
+            idade: idade,
+            host: {
+                idHostFamily: 1
+            }
+        };
+
+        integranteDTO.idade = parseInt(integranteDTO.idade); // Converter a idade para um número inteiro
+        var integranteDTOString = JSON.stringify(integranteDTO); // Converter o objeto para uma string JSON
+        console.log(integranteDTOString);
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1lZGUxMjNAZ21haWwuY29tIiwiaWF0IjoxNjg1ODA0MTMyLCJleHAiOjE2ODk0MDQxMzJ9.DY3AWfGe3NS-b8zX3_dP0bc-0ngsBFWx9LN9_x2DOOW_emCjlJU_-0Q9yyeKovVdL13In9wwJGLCUx7sX5fLtw' //
+            },
+            body: JSON.stringify(integranteDTO)
+        })
+            .then(function (response) {
+                // Verifica se a resposta da requisição foi bem-sucedida (código de status 2xx)
+                if (response.ok) {
+                    return response.json(); // Retorna a resposta como JSON
+                    console.log("deu certo");
+                } else {
+                    throw new Error('Erro na requisição.'); // Lança um erro caso a resposta não seja bem-sucedida
+                }
+            })
+            .then(function (data) {
+                console.log(data); // Manipula os dados da resposta aqui
+            })
+            .catch(function (error) {
+                console.error(error); // Manipula erros ocorridos durante a requisição
+            });
+    }
+
+
+
+</script>
 
 </html>
